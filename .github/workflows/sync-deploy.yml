@@ -1,0 +1,30 @@
+# Used to sync changes in moodle-docker-production init-scripts folder to init-scripts inside moodle-docker-deploy.
+# more info: https://github.com/marketplace/actions/push-directory-to-another-repository
+# Using my own (juanda) token inside repo as API_TOKEN_GITHUB
+
+name: Sync-moodle-docker-deploy
+
+on:
+  push:
+    branches-ignore:
+      - "**"
+    # branches: [master]
+    paths:
+      - "init-scripts/**"
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@master
+      - name: Pushes to another repository
+        uses: cpina/github-action-push-to-another-repository@master
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-directory: "init-scripts"
+          destination-github-username: "catedu"
+          destination-repository-name: "init-scripts"
+          user-email: juandacorreo@gmail.com

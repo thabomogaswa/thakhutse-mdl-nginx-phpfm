@@ -1,0 +1,17 @@
+{
+  "name": "data",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "data": "gsjson -s ./credentials.json -w junio -b 1SQjFfnTrMeGh281k0fAcDIL5oK_Kc2BR91Upr8kUU0E datos.json"
+  },
+  "author": "juanda <juandacorreo@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "csvtojson": "^2.0.10",
+    "google-spreadsheet": "^3.0.11",
+    "google-spreadsheet-to-json": "^1.0.0"
+  }
+}

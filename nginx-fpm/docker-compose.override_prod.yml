@@ -1,0 +1,61 @@
+version: "3"
+
+services:
+  proxy:
+    hostname: proxy
+    container_name: proxy
+    image: jwilder/nginx-proxy
+    labels:
+      com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy: "true"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "/var/run/docker.sock:/tmp/docker.sock:ro"
+      - "./proxy/vhost.d:/etc/nginx/vhost.d"
+      - "./proxy/custom.conf:/etc/nginx/conf.d/custom.conf"
+      - "/usr/share/nginx/html"
+      - "./proxy/certs:/etc/nginx/certs:ro"
+      - html:/usr/share/nginx/html
+    networks:
+      - frontend
+
+  ssl:
+    hostname: ssl
+    container_name: ssl
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    depends_on: [proxy]
+    volumes:
+      - "./proxy/certs:/etc/nginx/certs:rw"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./proxy/vhost.d:/etc/nginx/vhost.d"
+      - html:/usr/share/nginx/html
+    networks:
+      - frontend
+
+  web:
+    environment:
+      VIRTUAL_HOST: "${VIRTUAL_HOST}"
+      LETSENCRYPT_HOST: "${VIRTUAL_HOST}"
+      LETSENCRYPT_EMAIL: "${SSL_EMAIL}"
+
+  phpmyadmin:
+    hostname: phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    volumes:
+      - /sessions
+    networks:
+      - frontend
+      - backend
+    environment:
+      VIRTUAL_HOST: "${PHPMYADMIN_VIRTUAL_HOST}"
+      LETSENCRYPT_HOST: "${PHPMYADMIN_VIRTUAL_HOST}"
+      LETSENCRYPT_EMAIL: "${SSL_EMAIL}"
+
+networks:
+  frontend:
+    driver: bridge
+
+volumes:
+  html:

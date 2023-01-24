@@ -1,0 +1,61 @@
+#page-site-index.notloggedin {
+    .frontpage-marketing {
+        margin: -1em 0 2em 0;
+    }
+}
+.frontpage-guest-header {
+   min-height: 0px !important;
+}
+
+#mooveslideshow { display: none;}
+
+.frontpage-guest-header #mooveslideshow {
+  margin-top: 0px !important;
+  display: block !important;
+  max-height: 450px;
+  overflow: hidden;
+}
+.logo img { height: 40px; }
+  #page-site-index.slideshow #loginbox {
+    display: none !important;
+  }
+
+
+@media (min-width: 992px) {
+    a.btn-login-top {
+        display: block !important;
+        margin-top: 18px;
+    }
+}
+
+body.coursepresentation-cover {
+    #page {
+        padding-top: 10px !important;
+    }
+    .headerbkg { 
+         position: static !important;
+   
+    }
+   .withimage {
+      background-position: left !important;
+   }
+}
+
+#top-footer h3 { display: none; }
+
+/* remove search when not logged in */
+body.notloggedin .move-search-input { display: none;}
+
+
+/* no remove logo for small size */ 
+@media (max-width: 575px) {
+  .logo img {
+      width: 150px !important;
+      height: auto !important;
+      position: absolute !important;
+      top: 25px !important;
+  }
+  span.logo {
+      display: block !important;
+  }
+}
