@@ -60,7 +60,7 @@ services:
   db:
     hostname: db
     container_name: db
-    image: mysql:5.7
+    image: mariadb:jammy
     environment:
       MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
       MYSQL_DATABASE: "${MOODLE_DB_NAME}"

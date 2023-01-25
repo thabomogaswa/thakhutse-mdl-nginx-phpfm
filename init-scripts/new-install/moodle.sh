@@ -10,15 +10,12 @@
 #export $(grep -E -v '^#' /init-scripts/.env | xargs)
 
 # Config site
-moosh config-set forcetimezone Europe/Madrid
+moosh config-set forcetimezone Africa/Johannesburg
 moosh config-set calendar_site_timeformat %H:%M
 moosh config-set calendar_startwday 1
 moosh config-set debugdisplay 0
 moosh config-set frontpage 6
 moosh config-set frontpageloggedin 5,0
-
-
-
 
 # Config smtp
 echo >&2 "Configuring smtp..."

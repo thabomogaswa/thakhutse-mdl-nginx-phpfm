@@ -7,7 +7,7 @@ services:
 
   moodle:
     volumes:
-      - ./3.7.6/docker-entrypoint.sh:/usr/local/bin/docker-entrypoint.sh
+      - ./4.0.4-unoconv/docker-entrypoint.sh:/usr/local/bin/docker-entrypoint.sh
 
   phpmyadmin:
     hostname: phpmyadmin
